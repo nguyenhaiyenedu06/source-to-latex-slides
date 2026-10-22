@@ -1,0 +1,54 @@
+% Compile with XeLaTeX or LuaLaTeX. See PROVENANCE.md for attribution.
+\documentclass[aspectratio=169,11pt]{beamer}
+\usepackage{scuwqt}
+\usepackage{booktabs}
+\input{deck-config.tex}
+\title[Layout specimen]{Presentation template}
+\subtitle{English / Tiếng Việt}
+\author{}
+\institute{}
+\date{}
+\begin{document}
+\begin{frame}
+  \titlepage
+\end{frame}
+\deckcontents
+\section{Layout specimen}
+\begin{frame}{One clear message per slide}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.56\textwidth}
+      \begin{itemize}
+        \item Put the main message first.
+        \item Explain with a short, concrete example.
+        \item Keep citations beside supported content.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.40\textwidth}
+      \centering
+      \begin{tikzpicture}[node distance=1cm,
+        every node/.style={draw=Primary,rounded corners,align=center,
+          text width=3.2cm,minimum height=0.85cm,font=\small}]
+        \node (a) {Provided sources};
+        \node[below=of a] (b) {Main message};
+        \node[below=of b] (c) {Evidence review};
+        \draw[->,thick,Primary] (a)--(b);
+        \draw[->,thick,Primary] (b)--(c);
+      \end{tikzpicture}
+    \end{column}
+  \end{columns}
+  \slidecitation{Layout specimen only; replace with citations to provided sources.}
+\end{frame}
+\begin{frame}{Kiểm tra tiếng Việt và thuật ngữ song ngữ}
+  \begin{itemize}
+    \item Ngắn gọn, súc tích, sinh động, rõ ràng và liền mạch.
+    \item Giữ thuật ngữ chuyên ngành; dịch khi không đổi ý nghĩa.
+    \item Ví dụ trình bày: sơ đồ luồng (flowchart).
+  \end{itemize}
+  \begin{block}{Kiểm tra dấu và kiểu chữ}
+    Tiếng Việt: ă â đ ê ô ơ ư; Á Ắ Ấ Ế Ố Ớ Ứ; ạ ặ ậ ệ ộ ợ ự.
+    \textbf{Chữ đậm}, \textit{chữ nghiêng}; math: \(x_i,\;\alpha,\;\sum_{i=1}^{n} x_i\).
+  \end{block}
+  \slidecitation{Mẫu kiểm tra bố cục và font; chưa phải nội dung học thuật có nguồn.}
+\end{frame}
+\deckclosing{Thank you / Cảm ơn}{Questions / Câu hỏi}
+\end{document}

@@ -1,0 +1,122 @@
+% Derived from WQT1123/University-Presentation-Beamer; GPL-3.0.
+% Modified 2026-10-22: remove branding/CJK dependency; configurable art,
+% language strings and font; add citations and neutral contents/closing pages.
+\ProvidesPackage{scuwqt}[2026/10/22 Unbranded academic presentation theme]
+%=========================================================
+%加载需要的包
+\RequirePackage{tikz,fontspec,multicol,graphicx,xcolor,etoolbox}
+\usetikzlibrary{positioning,arrows.meta}
+\newcommand{\DeckCoverImage}{}
+\newcommand{\DeckContentsImage}{}
+\newcommand{\DeckClosingImage}{}
+\newcommand{\DeckContentsLabel}{Contents}
+%=========================================================
+%定义基本的颜色
+\definecolor{Primary}{RGB}{120,0,30} % 主色
+\definecolor{Secondary}{RGB}{100,0,30} % 次色
+\setbeamercolor{title in head/foot}{fg=white, bg=Primary} % 设置标题部分的背景色
+\setbeamercolor{institute in head/foot}{fg=white, bg=Primary!80} % 设置机构部分的背景色
+\setbeamercolor{date in head/foot}{fg=white, bg=Primary!60} % 设置日期部分的背景色
+\setbeamercolor{structure}{fg=Primary}
+\setbeamercolor{normal text}{fg=black}
+\setbeamercolor{alerted text}{fg=red}
+\setbeamercolor{example text}{fg=blue}
+\setbeamercolor{title}{fg=white, bg=Primary}
+\setbeamercolor{frametitle}{fg=white, bg=Secondary}
+\setbeamercolor{button}{bg=Primary,fg=white}
+\setbeamercolor{section in head/foot}{bg=Primary!80,fg=white}
+%=========================================================
+%设置目录自动加载
+\AtBeginSection[]{
+  \begin{frame}
+    \frametitle{\DeckContentsLabel}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+%设置首页的基本格式
+\setbeamertemplate{title page}{
+    \vspace{0.27\paperheight}
+    \begin{centering}
+        \begin{beamercolorbox}[sep=6pt,center]{title}
+            \usebeamerfont{title}\inserttitle\par%
+            {\usebeamerfont{subtitle}\insertsubtitle\par}
+            \vspace{0.5cm}
+            \usebeamerfont{author}\insertauthor\par
+            \usebeamerfont{institute}\insertinstitute\par
+            \usebeamerfont{date}\insertdate\par
+        \end{beamercolorbox}
+    \end{centering}
+}
+%=========================================================
+%设置标题的格式
+\setbeamertemplate{frametitle}{
+  \nointerlineskip % 移除frametitle与上文之间的间距
+  \begin{beamercolorbox}[sep=4pt, leftskip=0.35cm, rightskip=0.35cm, wd=\paperwidth]{frametitle}
+    \usebeamerfont{frametitle}\insertframetitle\par % 插入frametitle内容
+  \end{beamercolorbox}
+}
+\setbeamerfont{title}{size=\LARGE, series=\bfseries}
+\setbeamerfont{frametitle}{size=\large, series=\bfseries}
+%设置脚注
+\setbeamertemplate{footline}{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.33\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}
+    \usebeamerfont{title in head/foot}\insertshorttitle
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.34\paperwidth,ht=2.25ex,dp=1ex,center]{institute in head/foot}
+    \usebeamerfont{institute in head/foot}\insertshortinstitute
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.33\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}
+    \usebeamerfont{date in head/foot}\insertshortdate{}\hspace*{2em}
+    \insertframenumber{} / \inserttotalframenumber\hspace*{2ex} 
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+%=========================================================
+
+
+\useoutertheme{miniframes} % 或其他
+\useinnertheme{circles} % 或其他
+\setbeamertemplate{navigation symbols}{}
+\setbeamersize{text margin left=0.6cm,text margin right=0.6cm}
+\setlength{\parindent}{0pt}
+\setbeamertemplate{background}{%
+\tikz[overlay,remember picture]{
+    \ifnum\value{page}=1
+      \ifdefempty{\DeckCoverImage}{}{%
+        \node[at=(current page.north),anchor=north,yshift=0.3cm] {
+            \includegraphics[width=\paperwidth,height=0.7\paperheight]{\DeckCoverImage}
+        };
+      }
+    \fi
+}
+
+    }%设置基本的背景
+
+\newcommand{\slidecitation}[1]{%
+  \par\vfill\vspace{0.15cm}%
+  {\scriptsize\color{black!75}\raggedright #1\par}}
+\newcommand{\deckcontents}{%
+  {\setbeamertemplate{background}{%
+    \ifdefempty{\DeckContentsImage}{}{%
+    \tikz[overlay,remember picture]\node[at=(current page.west),anchor=west]{%
+      \includegraphics[width=0.48\paperwidth,height=\paperheight]{\DeckContentsImage}};
+    }}
+  \begin{frame}{\DeckContentsLabel}
+    \ifdefempty{\DeckContentsImage}{\tableofcontents}{%
+      \hfill\begin{minipage}{0.45\textwidth}\tableofcontents\end{minipage}
+    }
+  \end{frame}}}
+\newcommand{\deckclosing}[2]{%
+  {\setbeamertemplate{background}{%
+    \ifdefempty{\DeckClosingImage}{}{%
+    \tikz[overlay,remember picture]\node[at=(current page.north),anchor=north]{%
+      \includegraphics[width=\paperwidth,height=0.5\paperheight]{\DeckClosingImage}};
+    }}
+  \begin{frame}
+    \vspace{0.28\paperheight}
+    \centering{\LARGE\bfseries\color{Primary}#1\par}
+    \medskip{\large #2\par}
+  \end{frame}}}
+\mode<all>

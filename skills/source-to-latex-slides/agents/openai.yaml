@@ -1,0 +1,4 @@
+interface:
+  display_name: "Source to LaTeX Slides"
+  short_description: "Sourced English or Vietnamese academic Beamer slides"
+  default_prompt: "Use $source-to-latex-slides to create a concise, cited academic presentation from my sources; first ask whether the slides should be in English or Vietnamese."

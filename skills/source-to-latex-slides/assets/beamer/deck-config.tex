@@ -1,0 +1,14 @@
+% Customize these values for each presentation; preserve the layout.
+\definecolor{Primary}{RGB}{120,0,30}
+\definecolor{Secondary}{RGB}{100,0,30}
+\IfFontExistsTF{TeX Gyre Heros}{\newcommand{\DeckFont}{TeX Gyre Heros}}{%
+  \IfFontExistsTF{Arial}{\newcommand{\DeckFont}{Arial}}{%
+    \newcommand{\DeckFont}{Latin Modern Sans}}}
+\setmainfont{\DeckFont}
+\setsansfont{\DeckFont}
+\usefonttheme{professionalfonts}
+\renewcommand{\DeckContentsLabel}{Contents / Nội dung}
+% Supply real topic-specific illustrative image files; leave empty for QA.
+\renewcommand{\DeckCoverImage}{}
+\renewcommand{\DeckContentsImage}{}
+\renewcommand{\DeckClosingImage}{}
